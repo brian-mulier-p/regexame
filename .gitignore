@@ -3,6 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=git,webstorm
 
 build
+node_modules
 
 ### Git ###
 # Created by git for backups. To disable backups in Git:
