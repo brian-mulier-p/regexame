@@ -10,7 +10,7 @@
     "start-dev": "run-p dev-server dev-client",
     "start": "run-p prod-server prod-client",
     "dev-client": "react-scripts start",
-    "prod-client": "run-s build client",
+    "prod-client": "run-s build dev-client",
     "dev-server": "nodemon websocket_server.js",
     "prod-server": "node websocket_server.js",
     "build": "react-scripts build",

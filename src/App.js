@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {SocketContext} from './context/client-socket';
 
 
-function App(props) {
+function App() {
     const [client_id, setClientId] = useState(NaN);
     const socket = useContext(SocketContext);
 
