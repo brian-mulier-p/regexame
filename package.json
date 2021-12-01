@@ -7,15 +7,51 @@
     "node": "12.17.x"
   },
   "scripts": {
-    "start": "node websocket_server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-dev": "run-p dev-server dev-client",
+    "start": "run-p prod-server prod-client",
+    "dev-client": "react-scripts start",
+    "prod-client": "run-s build client",
+    "dev-server": "nodemon websocket_server.js",
+    "prod-server": "node websocket_server.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
     "express": "^4.17.1",
+    "npm-run-all": "^4.1.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
     "socket.io": "^4.4.0",
-    "socket.io-client": "^4.4.0"
+    "socket.io-client": "^4.4.0",
+    "web-vitals": "^1.1.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
