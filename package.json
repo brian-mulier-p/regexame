@@ -2,6 +2,7 @@
   "name": "regexame",
   "version": "1.0.0",
   "description": "",
+  "main": "websocket_server.js",
   "engines": {
     "node": "12.17.x"
   },
