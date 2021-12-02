@@ -6,12 +6,16 @@ import {SocketContext} from './context/client-socket';
 function App() {
     const [client_id, setClientId] = useState(NaN);
     const socket = useContext(SocketContext);
+    socket.on("client_number", (id) => {
+        setClientId(id);
+    })
 
     useEffect(() => {
-        socket.on("client_number", (data) => {
-            console.log(data);
-            setClientId(data.id);
-        })
+
+
+        return () => {
+            socket.disconnect();
+        }
     })
 
     return (

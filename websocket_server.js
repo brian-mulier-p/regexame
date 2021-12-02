@@ -19,8 +19,6 @@ let connectedClients = 0;
 
 io.on('connection', (socket) => {
     console.log('Client connected');
-    socket.emit("client_number", {
-        "id": ++connectedClients
-    })
+    socket.emit("client_number", ++connectedClients);
     socket.on('disconnect', () => console.log('Client disconnected'));
 });
