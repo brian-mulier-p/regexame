@@ -6,16 +6,25 @@
   "engines": {
     "node": "12.17.x"
   },
+  "watch": {
+    "dev": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "*",
+      "quiet": true,
+      "legacyWatch": true,
+      "delay": 1000,
+      "runOnChangeOnly": false
+    }
+  },
   "scripts": {
-    "start-dev": "run-p dev-server dev-client",
-    "start": "run-p prod-server prod-client",
-    "dev-client": "react-scripts start",
-    "prod-client": "run-s build dev-client",
-    "dev-server": "nodemon websocket_server.js",
-    "prod-server": "node websocket_server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start:dev": "run-p watch:dev prod",
+    "start": "run-s build prod",
+    "watch:dev": "npm-watch dev",
+    "dev": "npm run build",
+    "prod": "node websocket_server.js",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
@@ -52,6 +61,7 @@
     ]
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "npm-watch": "^0.11.0"
   }
 }
