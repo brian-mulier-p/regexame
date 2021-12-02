@@ -20,10 +20,10 @@
   },
   "scripts": {
     "start:dev": "run-p watch:dev prod",
-    "start": "run-s build prod",
+    "start": "node websocket_server.js",
+    "prod": "run-s build start",
     "watch:dev": "npm-watch dev",
     "dev": "npm run build",
-    "prod": "node websocket_server.js",
     "build": "react-scripts build"
   },
   "keywords": [],
