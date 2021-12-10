@@ -2,7 +2,7 @@
   "name": "regexame",
   "version": "1.0.0",
   "description": "",
-  "main": "websocket_server.js",
+  "main": "websocket_server/src/websocket_server.js",
   "engines": {
     "node": "12.17.x"
   },
@@ -19,9 +19,10 @@
     }
   },
   "scripts": {
-    "start:dev": "run-p watch:dev prod",
-    "start": "node websocket_server.js",
-    "prod": "run-s build start",
+    "start:dev": "run-p watch:dev server:dev",
+    "start": "node websocket_server/src/websocket_server.js",
+    "server:dev": "nodemon websocket_server/src/websocket_server.js",
+    "server": "run-s build start",
     "watch:dev": "npm-watch dev",
     "dev": "npm run build",
     "build": "react-scripts build"
