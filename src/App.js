@@ -2,6 +2,7 @@ import "./App.css";
 import React, {useContext, useState} from "react";
 import {SocketContext} from "./context/client-socket";
 import {Socket} from "socket.io-client";
+import Example from "./Example.js"
 
 
 function App() {
@@ -12,12 +13,16 @@ function App() {
 
     const [exampleToAdd, setExampleToAdd] = useState("");
     const handleExampleToAddChange = (e) => setExampleToAdd(e.target.value);
-    const [serverExamples, setServerExamples] = useState([]);
+    const [serverExamples : string[], setServerExamples] = useState([]);
 
     const [joinedServerOwnerId, setJoinedServerOwnerId] = useState(undefined);
     const [isCreatingServer, setIsCreatingServer] = useState(false);
     const handleCreateServer = () => setIsCreatingServer(true);
     const [isHost, setIsHost] = useState(false);
+
+    const [userRegex, setUserRegex] = useState("");
+    const [shouldEvaluateRegex, setShouldEvaluateRegex] = useState(false);
+    const handleUserRegexChange = (e) => setUserRegex(e.target.value);
 
     const socket: Socket = useContext(SocketContext);
 
@@ -54,7 +59,7 @@ function App() {
     }
 
     function handleGoToServerMenu() {
-        if(joinedServerOwnerId !== undefined) {
+        if (joinedServerOwnerId !== undefined) {
             socket.emit("disconnect_from_server", joinedServerOwnerId);
 
             setJoinedServerOwnerId(undefined);
@@ -74,14 +79,14 @@ function App() {
                 <header className="App-header">
                     {
                         serverExamples.length > 0 ? (<ul id="example_list">
-                                {serverExamples.map(serverExample => <li>
+                                {serverExamples.map(serverExample => <Example regex={userRegex === "" ? undefined : new RegExp(`^${userRegex}$`)}>
                                     {serverExample}
-                                </li>)}
+                                </Example>)}
                             </ul>) :
                             (<h1>No example available yet</h1>)
                     }
-                    <button onClick={handleGoToServerMenu}>Go back
-                    </button>
+                    <input id="user_regex" title="Enter a matching regex" onChange={handleUserRegexChange}/>
+                    <button onClick={handleGoToServerMenu}>Go back</button>
                 </header>
             </div>)
 
