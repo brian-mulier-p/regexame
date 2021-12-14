@@ -74,7 +74,7 @@ function App() {
 
     useEffect(() => {
         [...document.getElementsByTagName("button")].forEach(button => button.blur());
-    }, [isHost, joinedServerOwnerId, isCreatingServer, userNameIsSet, myServerRegexes])
+    }, [isHost, joinedServerOwnerId, isCreatingServer, userNameIsSet, myServerRegexes, userRegex])
 
     function askForServerCreation() {
         socket.emit("create_server", {name: serverName})
@@ -121,6 +121,14 @@ function App() {
         socket.emit("ask_for_user_regex_to_server");
     }
 
+    function newRegexWithTryCatch(regex) {
+        try{
+            return new RegExp(regexInterpreter === JAVA_INTERPRETER ? `^${regex}$` : regex);
+        }catch (err){
+            return undefined;
+        }
+    }
+
     return (<div className="App">
         {isHost ?
             myServerRegexes.length === 0 ?
@@ -148,7 +156,7 @@ function App() {
                                     <h4><b>{serverRegex.username}</b>{" : "}<i>{serverRegex.regex}</i></h4>
                                     {serverExamples.map(serverExample => {
                                         return (<Example
-                                            regex={new RegExp(regexInterpreter === JAVA_INTERPRETER ? `^${serverRegex.regex}$` : serverRegex.regex)}>
+                                            regex={newRegexWithTryCatch(serverRegex.regex)}>
                                             {serverExample}
                                         </Example>)
                                     })}
@@ -179,7 +187,7 @@ function App() {
                     (<header className="App-header">
                         <ul id="example_list">
                             {serverExamples.map(serverExample => <Example
-                                regex={userRegex === undefined ? undefined : new RegExp(regexInterpreter === JAVA_INTERPRETER ? `^${userRegex}$` : userRegex)}>
+                                regex={newRegexWithTryCatch(userRegex)}>
                                 {serverExample}
                             </Example>)}
                         </ul>
