@@ -6,6 +6,7 @@ Simply run `npm start` and you're ready to go. If needed, you can run `npm run s
 
 # What's the goal of the app ?
 The "teacher" should start creating a server and specify a few examples which should be matched by the students.
+
 The "students" can then join the server and start specifying a REGEX to try to match all given examples. There is an indicator next to each example which explains whether the regex matches against it or not. Note that if there is nothing next to examples, it means that you're REGEX is probably incorrect.
 
 For now the "go back to menu" button won't clean the app properly so everyone should probably reload the page to start from the beginning in a new server.
